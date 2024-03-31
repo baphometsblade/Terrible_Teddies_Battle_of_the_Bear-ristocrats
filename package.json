@@ -1,0 +1,33 @@
+{
+  "dependencies": {
+    "axios": "^1.6.8",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.20.2",
+    "connect-flash": "^0.1.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "ejs": "^3.1.9",
+    "express": "^4.19.2",
+    "express-session": "^1.18.0",
+    "express-validator": "^7.0.1",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.2.3",
+    "multer": "^1.4.5-lts.1",
+    "node-fetch": "^3.3.2",
+    "openai": "^4.29.2",
+    "passport": "^0.7.0",
+    "passport-google-oauth20": "^2.0.0",
+    "socket.io": "^4.7.5",
+    "winston": "^3.13.0"
+  },
+  "scripts": {
+    "start": "node server.js"
+  },
+  "name": "terrible_teddies_battle_of_the_bearistocrats",
+  "description": "\"Terrible Teddies: Battle of the Bear-ristocrats\" is a strategically engaging and humorously themed card battling game set in the Stuffed Realm, a world where teddy bears vie for power and influence. This project combines a rich, adult-themed narrative with a complex deck-building and dueling system, all brought to life through web technologies. Notably, the game features a unique collection of pre-generated bear images, ensuring a visually consistent and engaging experience for players.",
+  "version": "1.0.0",
+  "main": "server.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
