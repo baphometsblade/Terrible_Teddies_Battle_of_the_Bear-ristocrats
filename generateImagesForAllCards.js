@@ -13,6 +13,13 @@ const generateAndSaveImagesForAllCards = async () => {
   try {
     const cards = await Card.find({});
     for (const card of cards) {
+      // Check if an image already exists for the current card
+      const existingImage = await Image.findOne({ cardId: card._id });
+      if (existingImage) {
+        logger.info(`Image already exists for card ${card.name}, skipping image generation.`);
+        continue; // Skip to the next iteration if an image already exists
+      }
+
       const personalizedDescription = await generatePersonalizedDescription(card._id);
       const imageUrl = await generateImage(personalizedDescription);
       const newImage = new Image({

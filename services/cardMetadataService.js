@@ -51,7 +51,8 @@ const generateAndSaveImageForCard = async (cardId) => {
     while (currentAttempt < maxRetries) {
         try {
             const card = await Card.findById(cardId);
-            const prompt = `Generate an image for ${card.name}: ${card.backstory.substring(0, 100)}...`; // Custom prompt based on card's backstory
+            // Enhanced prompt for image generation
+            const prompt = `Generate an image for ${card.name}, a character in the game Terrible Teddies: Battle of the Bear-ristocrats. ${card.name} is known for ${card.specialAbilities.join(', ')}. They are a ${card.rarity ? card.rarity.toLowerCase() : 'common'} bear with a backstory of: ${card.backstory.substring(0, 100)}...`; // Custom prompt based on card's backstory and abilities
             const response = await axios.post('https://api.deepai.org/api/text2img', { text: prompt }, {
                 headers: {
                     'Api-Key': process.env.DEEP_AI_API_KEY
@@ -63,7 +64,7 @@ const generateAndSaveImageForCard = async (cardId) => {
                 return;
             }
             await Card.updateOne({ _id: cardId }, { $set: { imageUrl: imageResponse.output_url } });
-            logger.info(`Image generated and saved for card ID: ${cardId} using prompt: ${prompt}`);
+            logger.info(`Image generated and saved for card ID: ${cardId} using enhanced prompt: ${prompt}`);
             break; // Break the loop if the image is successfully generated and saved
         } catch (error) {
             logger.error('Error generating or saving image for card:', error.message, error.stack);
