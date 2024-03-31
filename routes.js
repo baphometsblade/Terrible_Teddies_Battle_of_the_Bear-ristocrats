@@ -4,9 +4,10 @@ const jwt = require('jsonwebtoken');
 const { check, validationResult } = require('express-validator');
 const passport = require('passport');
 const User = require('./models/userModel');
-const Card = require('./models/cardModel'); // Added to use Card model for fetching cards
+const Card = require('./models/cardModel');
 const logger = require('./utils/logger');
 const path = require('path');
+const MultiplayerService = require('./services/multiplayerService'); // Importing MultiplayerService
 
 const router = express.Router();
 
@@ -144,7 +145,7 @@ router.get('/auth/google/redirect', passport.authenticate('google', { failureRed
 // Home route
 router.get('/home', (req, res) => {
     logger.info('Accessed home page');
-    res.sendFile(path.join(__dirname, 'views', 'home.html')); // Updated to serve home.html
+    res.sendFile(path.join(__dirname, 'views', 'home.html'));
 });
 
 // New route to fetch all cards
@@ -173,6 +174,33 @@ router.get('/battles', (req, res) => {
 router.get('/profile', (req, res) => {
     logger.info('Accessed profile page');
     res.sendFile(path.join(__dirname, 'views', 'profile.html'));
+});
+
+// Implementing new routes for multiplayer features
+router.post('/create-game', async (req, res) => {
+    // Placeholder for creating a new game session
+    logger.info('Creating a new game session');
+    // Implement logic to create a new game session and return session details
+    // Remember to handle errors appropriately and log them
+    const newGameSession = await MultiplayerService.createGameSession(req.body.userId);
+    if (newGameSession.error) {
+        logger.error('Error creating game session:', newGameSession.error);
+        return res.status(500).json({ message: 'Failed to create game session', error: newGameSession.error });
+    }
+    res.json(newGameSession);
+});
+
+router.post('/join-game', async (req, res) => {
+    // Placeholder for joining an existing game session
+    logger.info('Joining an existing game session');
+    // Implement logic for a player to join an existing game session using session ID
+    // Remember to handle errors appropriately and log them
+    const joinGameResult = await MultiplayerService.joinGameSession(req.body.sessionId, req.body.userId);
+    if (joinGameResult.error) {
+        logger.error('Error joining game session:', joinGameResult.error);
+        return res.status(500).json({ message: 'Failed to join game session', error: joinGameResult.error });
+    }
+    res.json(joinGameResult);
 });
 
 module.exports = router;

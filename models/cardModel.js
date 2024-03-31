@@ -49,7 +49,20 @@ const cardSchema = new mongoose.Schema({
   edition: {
     type: String,
     required: true
-  }
+  },
+  energyCost: {
+    type: Number,
+    required: true,
+    default: 1 // Assuming a default energy cost for all cards unless specified otherwise
+  },
+  cardSynergies: [{
+    type: String,
+    required: false // Not all cards may have synergies
+  }],
+  uniqueEffects: [{
+    type: String,
+    required: false // Not all cards may have unique effects
+  }]
 });
 
 cardSchema.post('save', function(error, doc, next) {

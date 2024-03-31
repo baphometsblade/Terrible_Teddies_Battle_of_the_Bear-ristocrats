@@ -6,6 +6,7 @@
     <title>Battles - Terrible Teddies: Battle of the Bear-ristocrats</title>
     <link rel="stylesheet" href="/css/styles.css"> 
     <script src="/js/main.js" defer></script>
+    <script src="/js/battlesInteraction.js" defer></script> <!-- Added script for handling battles interactions -->
 </head>
 <body>
     <header>
@@ -22,26 +23,25 @@
     <main>
         <section id="available-battles">
             <h2>Available Battles</h2>
-            <!-- Available battles will be dynamically inserted here by main.js -->
+            <div id="available-battles-list">
+                <!-- Available battles will be dynamically inserted here by battlesInteraction.js -->
+            </div>
         </section>
         <section id="ongoing-battles">
             <h2>Ongoing Battles</h2>
-            <!-- Ongoing battles will be dynamically inserted here by main.js -->
+            <div id="ongoing-battles-list">
+                <!-- Ongoing battles will be dynamically inserted here by battlesInteraction.js -->
+            </div>
+        </section>
+        <section id="battle-results">
+            <h2>Battle Results</h2>
+            <div id="battle-results-list">
+                <!-- Battle results will be dynamically inserted here by battlesInteraction.js -->
+            </div>
         </section>
     </main>
     <footer>
         <p>&copy; 2024 Terrible Teddies. All rights reserved.</p>
     </footer>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Load available and ongoing battles
-            console.log('Loading available and ongoing battles...');
-            // Placeholder for loading battles functionality
-            // Remember to handle errors and log them appropriately
-        });
-
-        // Additional JavaScript for handling battles interactions
-        // Remember to log actions and handle errors appropriately
-    </script>
 </body>
 </html>

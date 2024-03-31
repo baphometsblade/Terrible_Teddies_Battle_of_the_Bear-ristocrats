@@ -6,10 +6,15 @@ const flash = require('connect-flash');
 const logger = require('./utils/logger');
 const routes = require('./routes');
 const cors = require('cors'); // Added for handling CORS
+const http = require('http');
+const socketio = require('socket.io');
+const multiplayerService = require('./services/multiplayerService');
 
 require('dotenv').config();
 
 const app = express();
+const server = http.createServer(app);
+const io = socketio(server);
 
 // Database connection
 mongoose.connect(process.env.MONGO_URI)
@@ -55,6 +60,27 @@ app.use('/', routes);
 // Static files
 app.use(express.static('public'));
 
+// Socket.io for real-time communication
+io.on('connection', socket => {
+  logger.info('New WebSocket connection');
+
+  socket.on('joinGame', async ({ userId, gameId }) => {
+    try {
+      const game = await multiplayerService.joinGame(userId, gameId);
+      socket.join(game.id);
+      io.to(game.id).emit('gameUpdate', game);
+      logger.info(`User ${userId} joined game ${gameId}`);
+    } catch (error) {
+      logger.error('Error joining game:', error.message, error.stack);
+      socket.emit('error', 'Failed to join game');
+    }
+  });
+
+  // Additional event listeners for game actions like 'makeMove', 'leaveGame', etc.
+  // Placeholder for additional multiplayer event handling
+
+});
+
 const PORT = process.env.PORT || 5006;
 
-app.listen(PORT, () => logger.info(`Server started on port ${PORT}`));
+server.listen(PORT, () => logger.info(`Server started on port ${PORT}`));
