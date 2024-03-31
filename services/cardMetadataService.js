@@ -1,6 +1,5 @@
-const mongoose = require('mongoose');
-const Card = require('../models/cardModel');
 const axios = require('axios');
+const Card = require('../models/cardModel');
 const logger = require('../utils/logger');
 
 // Function for generating metadata based on card properties
@@ -55,7 +54,7 @@ const generateAndSaveImageForCard = async (cardId) => {
             const prompt = `Generate an image for ${card.name}, a character in the game Terrible Teddies: Battle of the Bear-ristocrats. ${card.name} is known for ${card.specialAbilities.join(', ')}. They are a ${card.rarity ? card.rarity.toLowerCase() : 'common'} bear with a backstory of: ${card.backstory.substring(0, 100)}...`; // Custom prompt based on card's backstory and abilities
             const response = await axios.post('https://api.deepai.org/api/text2img', { text: prompt }, {
                 headers: {
-                    'Api-Key': process.env.DEEP_AI_API_KEY
+                    'Api-Key': process.env.DEEP_AI_API_KEY // Ensure you have set the DeepAI API key in your environment variables
                 }
             });
             const imageResponse = response.data;

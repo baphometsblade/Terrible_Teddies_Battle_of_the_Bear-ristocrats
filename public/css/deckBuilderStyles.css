@@ -8,7 +8,7 @@
   --card-bg: #fff;
   --card-shadow: rgba(0,0,0,0.2);
   --card-hover-scale: 1.05;
-  --font-family-main: Arial, sans-serif;
+  --font-family-main: 'Luckiest Guy', cursive; /* Updated to a more playful font */
 }
 
 body {
@@ -53,28 +53,34 @@ main {
 .card {
     background-color: var(--card-bg);
     margin: var(--spacing-small);
-    box-shadow: 0 2px 4px var(--card-shadow);
-    transition: transform 0.2s;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.5); /* Updated for a more pronounced effect */
+    transition: transform 0.2s, box-shadow 0.2s; /* Added box-shadow to transition */
     width: 200px;
     overflow: hidden;
     cursor: pointer;
+    border-radius: 10px; /* Added for rounded corners */
 }
 
 .card:hover {
-    transform: scale(var(--card-hover-scale));
+    transform: scale(1.05) rotate(3deg); /* Updated to include a slight rotation */
+    box-shadow: 0 6px 12px rgba(0,0,0,0.5); /* Updated for a more pronounced effect on hover */
 }
 
 .card img {
     width: 100%;
     height: auto;
+    border-top-left-radius: 10px; /* Added for rounded corners */
+    border-top-right-radius: 10px; /* Added for rounded corners */
 }
 
 .card p {
     padding: var(--spacing-medium);
     margin: 0;
-    background-color: var(--deck-builder-text);
+    background-color: var(--deck-builder-accent);
     color: #fff;
     text-align: center;
+    border-bottom-left-radius: 10px; /* Added for rounded corners */
+    border-bottom-right-radius: 10px; /* Added for rounded corners */
 }
 
 .save-deck-button {
@@ -98,4 +104,34 @@ footer {
     position: fixed;
     bottom: 0;
     width: 100%;
+}
+
+/* Media queries for responsive design */
+@media (max-width: 768px) {
+  .card-selection-area, .deck-preview-area {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .deck-preview-area {
+    width: 90%;
+  }
+
+  .card {
+    width: 45%;
+  }
+}
+
+@media (max-width: 480px) {
+  header, footer {
+    padding: var(--spacing-small);
+  }
+
+  .card {
+    width: 90%;
+  }
+
+  .card p {
+    padding: var(--spacing-small);
+  }
 }

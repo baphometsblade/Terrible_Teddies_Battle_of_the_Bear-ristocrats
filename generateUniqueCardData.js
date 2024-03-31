@@ -9,13 +9,12 @@ mongoose.connect(process.env.MONGO_URI)
   .catch(err => console.error('MongoDB connection error:', err));
 
 const generateUniqueMetadata = (card) => {
-  // Enhanced unique metadata generation logic based on card properties
   const specialAbilityDescriptions = card.specialAbilities.map((ability, index) => `${ability} empowers ${card.name} with a unique edge in battle, reflecting the game's setting and theme.`).join(' ');
   const rarityDescription = `As a ${card.rarity ? card.rarity.toLowerCase() : 'common'} bear, ${card.name} stands out in the realm of the Bear-ristocrats, embodying the game's humorous and adult-themed setting.`;
   const backstory = `In the Stuffed Realm, ${card.name} was once a mere plaything, forgotten and lost. Through a twist of fate and a dash of magic, it rose to prominence, becoming a legend whispered among both the plush and the living, showcasing the game's rich narrative.`;
   const abilitiesDescription = `Wielding ${card.specialAbilities.length} distinct abilities, ${card.name} is a force to be reckoned with, capable of turning the tide of any battle, perfectly aligning with the strategic depth of the game.`;
-  const artistName = "Artisan of the Stuffed Realm"; // More thematic artist name
-  const edition = "Bear-ristocratic Edition"; // More thematic edition name
+  const artistName = "Artisan of the Stuffed Realm";
+  const edition = "Bear-ristocratic Edition";
 
   return {
     backstory,
@@ -27,6 +26,11 @@ const generateUniqueMetadata = (card) => {
 };
 
 const updateCardWithMetadataAndImage = async (cardId) => {
+  if (!cardId) {
+    console.error('Card ID is required as an argument.');
+    process.exit(1);
+  }
+
   try {
     const card = await Card.findById(cardId);
     if (!card) {
@@ -41,28 +45,27 @@ const updateCardWithMetadataAndImage = async (cardId) => {
     });
 
     const existingImage = await Image.findOne({ cardId: card._id });
-    if (existingImage) {
+    if (!existingImage) {
+      const imageUrl = await generateImage(metadata.backstory + " " + metadata.abilitiesDescription)
+      .catch(error => {
+        console.error('Error generating image for card:', error.message, error.stack);
+        throw error;
+      });
+
+      const newImage = new Image({
+        cardId: card._id,
+        imageUrl,
+        imageDescription: `${card.name} - ${metadata.edition}`
+      });
+
+      await newImage.save()
+      .then(() => console.log(`Image generated and saved for card: ${card.name}`))
+      .catch(error => {
+        console.error('Error saving image for card:', error.message, error.stack);
+      });
+    } else {
       console.log(`Image already exists for card ${card.name}, skipping image generation.`);
-      return;
     }
-
-    const imageUrl = await generateImage(metadata.backstory + " " + metadata.abilitiesDescription)
-    .catch(error => {
-      console.error('Error generating image for card:', error.message, error.stack);
-      throw error;
-    });
-
-    const newImage = new Image({
-      cardId: card._id,
-      imageUrl,
-      imageDescription: `${card.name} - ${metadata.edition}`
-    });
-
-    await newImage.save()
-    .then(() => console.log(`Image generated and saved for card: ${card.name}`))
-    .catch(error => {
-      console.error('Error saving image for card:', error.message, error.stack);
-    });
   } catch (error) {
     console.error('Error updating card with metadata and image:', error.message, error.stack);
   } finally {
@@ -72,5 +75,6 @@ const updateCardWithMetadataAndImage = async (cardId) => {
   }
 };
 
-// Note: To use the updateCardWithMetadataAndImage function, call it with a specific card ID as an argument.
-// This function is designed to be used programmatically and should not be run directly as a script without specifying a card ID.
+updateCardWithMetadataAndImage(cardId).catch((error) => {
+  console.error('An error occurred:', error.message, error.stack);
+});

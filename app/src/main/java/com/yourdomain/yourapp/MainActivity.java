@@ -15,10 +15,25 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         webView = (WebView) findViewById(R.id.webview);
-        webView.setWebViewClient(new WebViewClient());
+        webView.setWebViewClient(new WebViewClient() {
+            @Override
+            public void onPageFinished(WebView view, String url) {
+                super.onPageFinished(view, url);
+                System.out.println("Page loaded: " + url);
+            }
+
+            @Override
+            public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
+                super.onReceivedError(view, errorCode, description, failingUrl);
+                System.err.println("Error loading page: " + description + " URL: " + failingUrl);
+            }
+        });
         webView.getSettings().setJavaScriptEnabled(true);
-}
-        String webAppUrl = "file:///android_asset/webapp/views/index.html";
+        webView.getSettings().setDomStorageEnabled(true); // Enable DOM storage API
+        webView.getSettings().setUseWideViewPort(true); // Enable viewport meta tag support
+        webView.getSettings().setLoadWithOverviewMode(true); // Load the WebView completely zoomed out
+
+        String webAppUrl = "file:///android_asset/webapp/views/index.html"; 
         webView.loadUrl(webAppUrl);
 
         // Log for successful WebView initialization

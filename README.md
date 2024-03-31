@@ -29,6 +29,16 @@ The project utilizes Node.js and Express for server-side logic, MongoDB for data
 4. Start the server with `node server.js`.
 5. Access the game through your web browser at the specified port.
 
+### Generating Card Metadata and Images Individually
+
+To generate metadata and images for a specific card, use the `generateUniqueCardData.js` script with the card ID as an argument. This script updates the card's metadata in the database and generates a new image based on the updated metadata.
+
+Example command:
+```
+node generateUniqueCardData.js <CardID>
+```
+Replace `<CardID>` with the unique identifier of the card you wish to update.
+
 ### License
 
 Copyright (c) 2024. All rights reserved.

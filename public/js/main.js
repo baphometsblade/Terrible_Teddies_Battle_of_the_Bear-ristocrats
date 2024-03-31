@@ -34,22 +34,7 @@ async function loadCardImages() {
       }
     });
 
-    // Implementing lazy loading for images to improve performance
-    if ('IntersectionObserver' in window) {
-      const observer = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            const image = entry.target;
-            image.src = image.dataset.src; // Correctly set src from dataset.src
-            observer.unobserve(image);
-          }
-        });
-      }, { rootMargin: '0px 0px 200px 0px' });
-
-      document.querySelectorAll('img.card-image').forEach(img => {
-        observer.observe(img);
-      });
-    }
+    lazyLoadImages();
   } catch (error) {
     console.error('Failed to load card images:', error.message, error.stack);
     alert('Failed to load card images. Please try again later.');
@@ -76,7 +61,7 @@ async function loadAvailableCards() {
       cardElement.classList.add('card-selection-item');
 
       const imgElement = document.createElement('img');
-      imgElement.src = card.imageUrl;
+      imgElement.dataset.src = card.imageUrl; // Use dataset.src for lazy loading
       imgElement.alt = `Image for ${card.name}`;
       cardElement.appendChild(imgElement);
 
@@ -86,6 +71,8 @@ async function loadAvailableCards() {
 
       cardSelectionElement.appendChild(cardElement);
     });
+
+    lazyLoadImages();
   } catch (error) {
     console.error('Failed to load available cards for deck building:', error.message, error.stack);
     alert('Failed to load available cards. Please try again later.');
@@ -95,6 +82,24 @@ async function loadAvailableCards() {
 function attachEventListeners() {
   // Placeholder for attaching event listeners related to deck building actions
   console.log('Attaching event listeners for deck building actions...');
+}
+
+function lazyLoadImages() {
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const image = entry.target;
+          image.src = image.dataset.src; // Correctly set src from dataset.src
+          observer.unobserve(image);
+        }
+      });
+    }, { rootMargin: '0px 0px 200px 0px' });
+
+    document.querySelectorAll('img.card-image').forEach(img => {
+      observer.observe(img);
+    });
+  }
 }
 
 document.addEventListener('DOMContentLoaded', () => {

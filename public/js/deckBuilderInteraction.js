@@ -1,13 +1,22 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Implement hover effects on cards
+    // Implement hover and touch effects on cards for a better user experience across devices
     const cards = document.querySelectorAll('.card');
     cards.forEach(card => {
+        // Hover effects for desktop
         card.addEventListener('mouseenter', () => {
             card.style.boxShadow = '0 4px 8px rgba(0,0,0,0.5)';
         });
         card.addEventListener('mouseleave', () => {
             card.style.boxShadow = '';
         });
+
+        // Touch effects for mobile devices
+        card.addEventListener('touchstart', () => {
+            card.style.boxShadow = '0 4px 8px rgba(0,0,0,0.5)';
+        }, {passive: true});
+        card.addEventListener('touchend', () => {
+            card.style.boxShadow = '';
+        }, {passive: true});
 
         // Click event to open modal with detailed card information
         card.addEventListener('click', () => {

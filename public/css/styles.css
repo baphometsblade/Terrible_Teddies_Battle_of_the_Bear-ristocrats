@@ -1,11 +1,11 @@
 :root {
-  --primary-color: #6d597a;
-  --accent-color: #355070;
-  --background-color: #f0efeb;
-  --text-color: #22223b;
-  --button-color: #e56b6f;
-  --button-hover-color: #c14953;
-  --font-main: 'Arial', sans-serif;
+  --primary-color: #ffcc00; /* Updated to a more vibrant color */
+  --accent-color: #ff77aa; /* Updated to a more vibrant color */
+  --background-color: #282828; /* Updated to a darker shade for contrast */
+  --text-color: #ffffff; /* Updated for better readability on dark background */
+  --button-color: #4CAF50; /* Updated to a more playful color */
+  --button-hover-color: #45a049; /* Updated to complement the new button color */
+  --font-main: 'Luckiest Guy', cursive; /* Updated to a more playful font */
   --spacing-small: 8px;
   --spacing-medium: 16px;
   --spacing-large: 32px;
@@ -39,19 +39,23 @@ main {
 .card {
   background-color: #fff;
   margin: var(--spacing-small);
-  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-  transition: transform 0.2s;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3); /* Updated for a more pronounced effect */
+  transition: transform 0.2s, box-shadow 0.2s; /* Added box-shadow to transition */
   width: 200px;
   overflow: hidden;
+  border-radius: 10px; /* Added for rounded corners */
 }
 
 .card:hover {
-  transform: scale(1.05);
+  transform: scale(1.05) rotate(3deg); /* Updated to include a slight rotation */
+  box-shadow: 0 6px 12px rgba(0,0,0,0.5); /* Updated for a more pronounced effect on hover */
 }
 
 .card img {
   width: 100%;
   height: auto;
+  border-top-left-radius: 10px; /* Added for rounded corners */
+  border-top-right-radius: 10px; /* Added for rounded corners */
 }
 
 .card p {
@@ -60,6 +64,8 @@ main {
   background-color: var(--accent-color);
   color: #fff;
   text-align: center;
+  border-bottom-left-radius: 10px; /* Added for rounded corners */
+  border-bottom-right-radius: 10px; /* Added for rounded corners */
 }
 
 footer {
@@ -70,4 +76,33 @@ footer {
   position: fixed;
   bottom: 0;
   width: 100%;
+}
+
+/* Media queries for responsive design */
+@media (max-width: 768px) {
+  header, footer {
+    padding: var(--spacing-small);
+  }
+
+  .card {
+    width: 45%; /* Adjust card width for smaller screens */
+  }
+
+  #card-gallery {
+    justify-content: center;
+  }
+
+  main {
+    padding: var(--spacing-small);
+  }
+
+  .card p {
+    padding: var(--spacing-small);
+  }
+}
+
+@media (max-width: 480px) {
+  .card {
+    width: 90%; /* Further adjust card width for very small screens */
+  }
 }
