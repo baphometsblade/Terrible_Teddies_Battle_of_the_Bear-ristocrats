@@ -1,8 +1,7 @@
 async function loadCardImages() {
   try {
-    // Assuming AXIOS_URL is set to the backend API dynamically
-    const axiosUrl = window.location.origin + "/api"; // Dynamically set AXIOS_URL based on the current origin
-    const response = await fetch(`${axiosUrl}/cards`); // Updated to use AXIOS_URL for fetching cards
+    const axiosUrl = window.location.origin + "/api/cards"; // Dynamically set AXIOS_URL based on the current origin
+    const response = await fetch(axiosUrl); // Updated to use AXIOS_URL for fetching cards
     if (!response.ok) {
       throw new Error('Network response was not ok');
     }
