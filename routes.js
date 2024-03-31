@@ -6,13 +6,14 @@ const passport = require('passport');
 const User = require('./models/userModel');
 const Card = require('./models/cardModel'); // Added to use Card model for fetching cards
 const logger = require('./utils/logger');
+const path = require('path');
 
 const router = express.Router();
 
 // Root URL route
 router.get('/', (req, res) => {
     logger.info('Root URL accessed');
-    res.send('Welcome to Terrible Teddies Battle of the Bear-ristocrats');
+    res.sendFile(path.join(__dirname, 'views', 'index.html'));
 });
 
 // Registration route
@@ -143,7 +144,7 @@ router.get('/auth/google/redirect', passport.authenticate('google', { failureRed
 // Home route
 router.get('/home', (req, res) => {
     logger.info('Accessed home page');
-    res.send('Home page');
+    res.sendFile(path.join(__dirname, 'views', 'home.html')); // Updated to serve home.html
 });
 
 // New route to fetch all cards

@@ -7,7 +7,9 @@ require('dotenv').config();
 
 mongoose.connect(process.env.MONGO_URI)
   .then(() => logger.info('MongoDB Connected'))
-  .catch(err => logger.error('MongoDB connection error:', err));
+  .catch(err => {
+    logger.error('MongoDB connection error:', err.message, err.stack);
+  });
 
 const generateAndSaveImagesForAllCards = async () => {
   try {
@@ -21,14 +23,18 @@ const generateAndSaveImagesForAllCards = async () => {
       }
 
       const personalizedDescription = await generatePersonalizedDescription(card._id);
-      const imageUrl = await generateImage(personalizedDescription);
-      const newImage = new Image({
-        cardId: card._id,
-        imageUrl,
-        imageDescription: personalizedDescription
-      });
-      await newImage.save();
-      logger.info(`Image for card ${card.name} generated and saved successfully.`);
+      try {
+        const imageUrl = await generateImage(personalizedDescription);
+        const newImage = new Image({
+          cardId: card._id,
+          imageUrl,
+          imageDescription: personalizedDescription
+        });
+        await newImage.save();
+        logger.info(`Image for card ${card.name} generated and saved successfully.`);
+      } catch (imageError) {
+        logger.error(`Error generating or saving image for card ${card.name}:`, imageError.message, imageError.stack);
+      }
     }
   } catch (error) {
     logger.error('Error generating or saving images for cards:', error.message, error.stack);
