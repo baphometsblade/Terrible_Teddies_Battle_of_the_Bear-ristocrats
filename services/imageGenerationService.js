@@ -1,4 +1,3 @@
-const axios = require('axios');
 const Card = require('../models/cardModel');
 const logger = require('../utils/logger');
 
@@ -18,26 +17,6 @@ async function generatePersonalizedDescription(cardId) {
   }
 }
 
-// Function for generating images based on descriptions
-async function generateImage(description) {
-  try {
-    // Using DeepAI's Text to Image API to generate an image based on the description
-    const response = await axios.post('https://api.deepai.org/api/text2img', { text: description }, {
-      headers: {
-        'Api-Key': process.env.DEEP_AI_API_KEY
-      }
-    });
-    if (response.status !== 200 || !response.data.output_url) {
-      throw new Error('Failed to generate image');
-    }
-    return response.data.output_url;
-  } catch (error) {
-    logger.error('Error generating image:', error.message, error.stack);
-    throw error;
-  }
-}
-
 module.exports = {
-  generatePersonalizedDescription,
-  generateImage
+  generatePersonalizedDescription
 };
