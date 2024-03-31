@@ -1,59 +1,73 @@
+:root {
+  --primary-color: #6d597a;
+  --accent-color: #355070;
+  --background-color: #f0efeb;
+  --text-color: #22223b;
+  --button-color: #e56b6f;
+  --button-hover-color: #c14953;
+  --font-main: 'Arial', sans-serif;
+  --spacing-small: 8px;
+  --spacing-medium: 16px;
+  --spacing-large: 32px;
+}
+
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
-    margin: 0;
-    padding: 0;
+  font-family: var(--font-main);
+  background-color: var(--background-color);
+  color: var(--text-color);
+  margin: 0;
+  padding: 0;
 }
 
 header {
-    background-color: #333;
-    color: #fff;
-    padding: 20px;
-    text-align: center;
+  background-color: var(--primary-color);
+  color: #fff;
+  padding: var(--spacing-large);
+  text-align: center;
 }
 
 main {
-    padding: 20px;
+  padding: var(--spacing-medium);
 }
 
 #card-gallery {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
 }
 
 .card {
-    background-color: #fff;
-    margin: 10px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-    transition: transform 0.2s;
-    width: 200px;
-    overflow: hidden;
+  background-color: #fff;
+  margin: var(--spacing-small);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  transition: transform 0.2s;
+  width: 200px;
+  overflow: hidden;
 }
 
 .card:hover {
-    transform: scale(1.05);
+  transform: scale(1.05);
 }
 
 .card img {
-    width: 100%;
-    height: auto;
+  width: 100%;
+  height: auto;
 }
 
 .card p {
-    padding: 15px;
-    margin: 0;
-    background-color: #333;
-    color: #fff;
-    text-align: center;
+  padding: var(--spacing-medium);
+  margin: 0;
+  background-color: var(--accent-color);
+  color: #fff;
+  text-align: center;
 }
 
 footer {
-    background-color: #333;
-    color: #fff;
-    text-align: center;
-    padding: 10px;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
+  background-color: var(--primary-color);
+  color: #fff;
+  text-align: center;
+  padding: var(--spacing-small);
+  position: fixed;
+  bottom: 0;
+  width: 100%;
 }

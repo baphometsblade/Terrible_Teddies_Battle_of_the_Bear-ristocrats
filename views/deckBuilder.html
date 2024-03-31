@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deck Builder - Terrible Teddies: Battle of the Bear-ristocrats</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/deckBuilderStyles.css"> 
+    <script src="/js/main.js" defer></script>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/profile">Profile</a></li>
+                <li><a href="/deck-builder">Deck Builder</a></li>
+                <li><a href="/battles">Battles</a></li>
+            </ul>
+        </nav>
+        <h1>Deck Builder</h1>
+    </header>
+    <main>
+        <section id="deck-builder">
+            <h2>Build Your Deck</h2>
+            <div id="card-selection">
+                <h3>Select Cards</h3>
+                <!-- Cards will be dynamically inserted here by main.js -->
+            </div>
+            <div id="deck-preview">
+                <h3>Deck Preview</h3>
+                <!-- Selected cards for the deck will be shown here -->
+            </div>
+            <button id="save-deck">Save Deck</button>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 Terrible Teddies. All rights reserved.</p>
+    </footer>
+    <script src="/js/deckBuilderInteraction.js" defer></script>
+</body>
+</html>

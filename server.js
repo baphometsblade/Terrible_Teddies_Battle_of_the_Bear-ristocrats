@@ -5,6 +5,7 @@ const passport = require('passport');
 const flash = require('connect-flash');
 const logger = require('./utils/logger');
 const routes = require('./routes');
+const cors = require('cors'); // Added for handling CORS
 
 require('dotenv').config();
 
@@ -18,6 +19,13 @@ mongoose.connect(process.env.MONGO_URI)
 // Middleware
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
+
+// CORS Middleware for handling CORS errors
+app.use(cors({
+  origin: ['http://localhost:5006', 'https://yourproductiondomain.com'], // Specify allowed origins for security
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
 
 // Express session
 app.use(session({

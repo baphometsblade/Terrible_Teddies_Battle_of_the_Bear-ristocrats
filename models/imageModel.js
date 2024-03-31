@@ -20,7 +20,7 @@ const imageSchema = new mongoose.Schema({
     type: String,
     required: true
   }
-});
+}, { timestamps: true }); // This option adds createdAt and updatedAt fields automatically
 
 imageSchema.post('save', function(error, doc, next) {
   if (error) {
