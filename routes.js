@@ -8,6 +8,7 @@ const Card = require('./models/cardModel');
 const logger = require('./utils/logger');
 const path = require('path');
 const MultiplayerService = require('./services/multiplayerService'); // Importing MultiplayerService
+const teddyBearGenerationService = require('./services/teddyBearGenerationService'); // Importing TeddyBearGenerationService
 
 const router = express.Router();
 
@@ -201,6 +202,20 @@ router.post('/join-game', async (req, res) => {
         return res.status(500).json({ message: 'Failed to join game session', error: joinGameResult.error });
     }
     res.json(joinGameResult);
+});
+
+// New route for generating teddy bear metadata and images
+router.post('/api/generate-teddy', async (req, res) => {
+    try {
+        const teddyData = await teddyBearGenerationService.generateTeddyBearMetadata();
+        const newTeddy = new Card(teddyData);
+        await newTeddy.save();
+        logger.info('New teddy bear generated and saved successfully');
+        res.json(newTeddy);
+    } catch (error) {
+        logger.error('Failed to generate teddy bear:', error.message, error.stack);
+        res.status(500).send('Server error during teddy bear generation');
+    }
 });
 
 module.exports = router;

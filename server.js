@@ -19,7 +19,10 @@ const io = socketio(server);
 // Database connection
 mongoose.connect(process.env.MONGO_URI)
   .then(() => logger.info('MongoDB Connected'))
-  .catch(err => logger.error('MongoDB connection error:', err));
+  .catch(err => {
+    logger.error('MongoDB connection error:', err);
+    console.error('Please ensure your MONGO_URI is correct in the .env file.');
+  });
 
 // Middleware
 app.use(express.urlencoded({ extended: false }));
