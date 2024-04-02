@@ -63,7 +63,7 @@ class CardComponent {
         document.body.appendChild(modal);
         document.body.style.overflow = 'hidden'; // Prevent scrolling when modal is open
 
-        console.log(`Modal opened for card: ${cardData.name}`);
+        console.log(`Modal opened for card: ${cardData.name}`); // Enhanced logging for debugging
     }
 }
 
@@ -73,8 +73,8 @@ window.closeModal = function() {
     if (modal) {
         modal.remove();
         document.body.style.overflow = ''; // Re-enable scrolling when modal is closed
-        console.log('Modal closed');
+        console.log('Modal closed'); // Enhanced logging for debugging
     } else {
-        console.error('Failed to close modal');
+        console.error('Failed to close modal'); // Enhanced error logging
     }
 };

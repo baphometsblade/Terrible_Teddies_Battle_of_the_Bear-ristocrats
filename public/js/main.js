@@ -13,6 +13,13 @@ async function loadCardImages() {
       return;
     }
 
+    if (cards.length === 0) {
+      const noCardsMessage = document.createElement('p');
+      noCardsMessage.textContent = 'No cards available at the moment.';
+      cardGalleryElement.appendChild(noCardsMessage);
+      return;
+    }
+
     cards.forEach(card => {
       if (card.imageUrl) {
         const cardElement = document.createElement('div');
@@ -53,6 +60,13 @@ async function loadAvailableCards() {
     const cardSelectionElement = document.getElementById('card-selection');
     if (!cardSelectionElement) {
       console.error('Card selection element not found');
+      return;
+    }
+
+    if (cards.length === 0) {
+      const noCardsMessage = document.createElement('p');
+      noCardsMessage.textContent = 'No cards available for deck building at the moment.';
+      cardSelectionElement.appendChild(noCardsMessage);
       return;
     }
 

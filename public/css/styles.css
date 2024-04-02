@@ -17,6 +17,9 @@ body {
   color: var(--text-color);
   margin: 0;
   padding: 0;
+  background-image: url('/images/naughty-teddy-bears-background.jpg'); /* Corrected path to the background image */
+  background-size: cover;
+  background-position: center;
 }
 
 header {
