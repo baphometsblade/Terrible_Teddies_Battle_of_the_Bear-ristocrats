@@ -1,0 +1,58 @@
+INFO:root:Starting AI conversation for game development...
+INFO:root:Starting AI conversation for game development...
+INFO:httpx:HTTP Request: POST http://localhost:8081/v1/chat/completions "HTTP/1.1 200 OK"
+ERROR:root:Error during text generation: 'ChatCompletionMessage' object is not subscriptable
+INFO:root:ContentGeneratorAgent: Generated game concept - 
+INFO:httpx:HTTP Request: POST http://localhost:8081/v1/chat/completions "HTTP/1.1 200 OK"
+ERROR:root:Error during text generation: 'ChatCompletionMessage' object is not subscriptable
+INFO:root:HumorVerificationAgent: Added humor - 
+INFO:httpx:HTTP Request: POST http://localhost:8081/v1/chat/completions "HTTP/1.1 200 OK"
+ERROR:root:Error during text generation: 'ChatCompletionMessage' object is not subscriptable
+INFO:root:GameLoreAgent: Enriched lore - 
+INFO:httpx:HTTP Request: POST http://localhost:8081/v1/chat/completions "HTTP/1.1 200 OK"
+ERROR:root:Error during text generation: 'ChatCompletionMessage' object is not subscriptable
+INFO:root:GUIDeveloperAgent: Designed GUI - 
+INFO:root:AI conversation for game development completed.
+INFO:root:Starting AI conversation for game development...
+INFO:httpx:HTTP Request: POST http://localhost:8081/v1/chat/completions "HTTP/1.1 200 OK"
+ERROR:root:Error during text generation: 'ChatCompletionMessage' object is not subscriptable
+INFO:root:ContentGeneratorAgent: Generated game concept - 
+INFO:httpx:HTTP Request: POST http://localhost:8081/v1/chat/completions "HTTP/1.1 200 OK"
+ERROR:root:Error during text generation: 'ChatCompletionMessage' object is not subscriptable
+INFO:root:HumorVerificationAgent: Added humor - 
+INFO:httpx:HTTP Request: POST http://localhost:8081/v1/chat/completions "HTTP/1.1 200 OK"
+ERROR:root:Error during text generation: 'ChatCompletionMessage' object is not subscriptable
+INFO:root:GameLoreAgent: Enriched lore - 
+INFO:httpx:HTTP Request: POST http://localhost:8081/v1/chat/completions "HTTP/1.1 200 OK"
+ERROR:root:Error during text generation: 'ChatCompletionMessage' object is not subscriptable
+INFO:root:GUIDeveloperAgent: Designed GUI - 
+INFO:root:AI conversation for game development completed.
+INFO:root:Starting AI conversation for game development...
+INFO:httpx:HTTP Request: POST http://localhost:8081/v1/chat/completions "HTTP/1.1 200 OK"
+ERROR:root:Error during text generation: 'ChatCompletionMessage' object is not subscriptable
+INFO:root:ContentGeneratorAgent: Generated game concept - 
+INFO:httpx:HTTP Request: POST http://localhost:8081/v1/chat/completions "HTTP/1.1 200 OK"
+ERROR:root:Error during text generation: 'ChatCompletionMessage' object is not subscriptable
+INFO:root:HumorVerificationAgent: Added humor - 
+INFO:httpx:HTTP Request: POST http://localhost:8081/v1/chat/completions "HTTP/1.1 200 OK"
+ERROR:root:Error during text generation: 'ChatCompletionMessage' object is not subscriptable
+INFO:root:GameLoreAgent: Enriched lore - 
+INFO:httpx:HTTP Request: POST http://localhost:8081/v1/chat/completions "HTTP/1.1 200 OK"
+ERROR:root:Error during text generation: 'ChatCompletionMessage' object is not subscriptable
+INFO:root:GUIDeveloperAgent: Designed GUI - 
+INFO:root:AI conversation for game development completed.
+Starting AI-powered game development...
+ContentGeneratorAgent is generating content for: Initial game concept
+HTTP Request: POST http://localhost:8081/v1/chat/completions "HTTP/1.1 200 OK"
+Error during text generation: 'ChatCompletionMessage' object is not subscriptable
+HumorVerificationAgent is adding humor...
+HTTP Request: POST http://localhost:8081/v1/chat/completions "HTTP/1.1 200 OK"
+Error during text generation: 'ChatCompletionMessage' object is not subscriptable
+GameLoreAgent is enhancing the lore...
+HTTP Request: POST http://localhost:8081/v1/chat/completions "HTTP/1.1 200 OK"
+Error during text generation: 'ChatCompletionMessage' object is not subscriptable
+GUIDeveloperAgent is designing GUI...
+HTTP Request: POST http://localhost:8081/v1/chat/completions "HTTP/1.1 200 OK"
+Error during text generation: 'ChatCompletionMessage' object is not subscriptable
+AI-powered game development completed. Check ai_conversation.log for details.
+Starting AI-powered game development...

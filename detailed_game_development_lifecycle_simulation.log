@@ -1,0 +1,20 @@
+Starting detailed game development lifecycle simulation...
+HTTP Request: POST http://localhost:8081/v1/chat/completions "HTTP/1.1 200 OK"
+Error during text generation: 'ChatCompletionMessage' object is not subscriptable
+HTTP Request: POST http://localhost:8081/v1/chat/completions "HTTP/1.1 200 OK"
+Error during text generation: 'ChatCompletionMessage' object is not subscriptable
+HTTP Request: POST http://localhost:8081/v1/chat/completions "HTTP/1.1 200 OK"
+Error during text generation: 'ChatCompletionMessage' object is not subscriptable
+HTTP Request: POST http://localhost:8081/v1/chat/completions "HTTP/1.1 200 OK"
+Error during text generation: 'ChatCompletionMessage' object is not subscriptable
+HTTP Request: POST http://localhost:8081/v1/chat/completions "HTTP/1.1 200 OK"
+Error during text generation: 'ChatCompletionMessage' object is not subscriptable
+HTTP Request: POST http://localhost:8081/v1/chat/completions "HTTP/1.1 200 OK"
+Error during text generation: 'ChatCompletionMessage' object is not subscriptable
+HTTP Request: POST http://localhost:8081/v1/chat/completions "HTTP/1.1 200 OK"
+Error during text generation: 'ChatCompletionMessage' object is not subscriptable
+HTTP Request: POST http://localhost:8081/v1/chat/completions "HTTP/1.1 200 OK"
+Error during text generation: 'ChatCompletionMessage' object is not subscriptable
+HTTP Request: POST http://localhost:8081/v1/chat/completions "HTTP/1.1 200 OK"
+Error during text generation: 'ChatCompletionMessage' object is not subscriptable
+Detailed game development lifecycle simulation completed. Outputs are saved to local files.
