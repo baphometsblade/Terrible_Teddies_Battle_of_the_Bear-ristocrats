@@ -1,10 +1,13 @@
 const socketIO = require('socket.io');
 const logger = require('../utils/logger');
 
+const Game = require('../models/gameModel'); // Assuming a game model exists for storing game state
+
 class MultiplayerService {
     constructor(server) {
         this.io = socketIO(server);
         this.rooms = {}; // Tracks active rooms
+        this.games = new Map(); // Tracks game states
         this.debugMode = false; // Tracks the debug mode status
         this.initialize();
     }
@@ -19,7 +22,7 @@ class MultiplayerService {
         this.io.on('connection', (socket) => {
             logger.info(`New connection: ${socket.id}`);
 
-            socket.on('joinRoom', ({ roomId, userId }) => {
+            socket.on('joinRoom', async ({ roomId, userId }) => {
                 try {
                     if (!this.rooms[roomId]) {
                         this.rooms[roomId] = { players: [], maxPlayers: 2 };
@@ -32,7 +35,9 @@ class MultiplayerService {
                         socket.to(roomId).emit('playerJoined', { userId });
 
                         if (this.rooms[roomId].players.length === this.rooms[roomId].maxPlayers) {
-                            this.io.to(roomId).emit('startGame');
+                            const game = await this.createGame(roomId, this.rooms[roomId].players);
+                            this.games.set(roomId, game);
+                            this.io.to(roomId).emit('gameUpdate', game);
                             logger.info(`Game started in room ${roomId}`);
                         }
                     } else {
@@ -45,9 +50,30 @@ class MultiplayerService {
                 }
             });
 
-            socket.on('moveMade', ({ roomId, move }) => {
+            socket.on('moveMade', async ({ roomId, userId, move }) => {
                 try {
-                    socket.to(roomId).emit('moveMade', move);
+                    const game = this.games.get(roomId);
+                    if (!game || game.turn !== userId) {
+                        return socket.emit('error', 'Invalid move');
+                    }
+
+                    // Example move: playing a card
+                    if (move.type === 'PLAY_CARD') {
+                        const player = game.player1.id === userId ? game.player1 : game.player2;
+                        const cardIndex = player.hand.findIndex(c => c.id === move.cardId);
+                        if (cardIndex > -1) {
+                            const card = player.hand.splice(cardIndex, 1)[0];
+                            game.board[userId].push(card);
+                        }
+                    }
+
+                    // Switch turns
+                    game.turn = game.players.find(p => p !== userId);
+
+                    // Update the game state in the database
+                    await Game.updateOne({ id: roomId }, { $set: game });
+
+                    this.io.to(roomId).emit('gameUpdate', game);
                     logger.info(`Move made in room ${roomId}: ${JSON.stringify(move)}`);
                 } catch (error) {
                     logger.error('Error in moveMade event:', error.message, error.stack);
@@ -85,6 +111,24 @@ class MultiplayerService {
                 }
             });
         });
+    }
+
+    async createGame(roomId, players) {
+        const [player1Id, player2Id] = players;
+        const newGame = new Game({
+            id: roomId,
+            players: players,
+            state: 'in-progress',
+            turn: player1Id,
+            player1: { id: player1Id },
+            player2: { id: player2Id }
+        });
+
+        // Here you would populate the decks and deal cards
+
+        await newGame.save();
+        logger.info(`Game ${roomId} saved to database.`);
+        return newGame.toObject();
     }
 }
 

@@ -46,6 +46,11 @@ const userSchema = new mongoose.Schema({
   winLossRecord: {
     wins: { type: Number, default: 0 },
     losses: { type: Number, default: 0 }
+  },
+  decks: {
+      type: [[mongoose.Schema.Types.ObjectId]],
+      ref: 'Card',
+      default: []
   }
 });
 

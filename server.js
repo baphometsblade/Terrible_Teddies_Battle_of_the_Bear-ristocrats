@@ -4,11 +4,16 @@ const session = require('express-session');
 const passport = require('passport');
 const flash = require('connect-flash');
 const logger = require('./utils/logger');
-const routes = require('./routes');
+const authRoutes = require('./routes/auth');
+const cardRoutes = require('./routes/cards');
+const gameRoutes = require('./routes/game');
+const viewRoutes = require('./routes/index');
+const userRoutes = require('./routes/user');
 const cors = require('cors'); // Added for handling CORS
 const http = require('http');
 const socketio = require('socket.io');
 const multiplayerService = require('./services/multiplayerService');
+const errorHandler = require('./middleware/errorHandler');
 
 require('dotenv').config();
 
@@ -58,7 +63,11 @@ app.use((req, res, next) => {
 });
 
 // Routes
-app.use('/', routes);
+app.use('/api/auth', authRoutes);
+app.use('/api', cardRoutes);
+app.use('/api/game', gameRoutes);
+app.use('/api/user', userRoutes);
+app.use('/', viewRoutes);
 
 // Static files
 app.use(express.static('public'));
@@ -85,5 +94,8 @@ io.on('connection', socket => {
 });
 
 const PORT = process.env.PORT || 5006;
+
+// Error handling middleware
+app.use(errorHandler);
 
 server.listen(PORT, () => logger.info(`Server started on port ${PORT}`));
